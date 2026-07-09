@@ -1,4 +1,4 @@
-from functions import load_todos, write_todos
+from functions import add_todo, show_todos, edit_todo, complete_todo
 
 while True:
     user_action = input(
@@ -12,17 +12,12 @@ while True:
             print("Todo cannot be empty.")
             continue
 
-        todos = load_todos()
-
-        todos.append(todo)
-
-        write_todos(todos)
-
+        add_todo(todo)
         print("Todo added successfully.")
 
     elif user_action == "show":
 
-        todos = load_todos()
+        todos = show_todos()
 
         if not todos:
             print("No todos found.")
@@ -36,17 +31,13 @@ while True:
         try:
             todo_index = int(user_action[5:]) - 1
 
-            todos = load_todos()
-
             new_todo = input("Enter new todo: ").strip()
 
             if not new_todo:
                 print("Todo cannot be empty.")
                 continue
 
-            todos[todo_index] = new_todo
-
-            write_todos(todos)
+            edit_todo(todo_index, new_todo)
 
             print("Todo updated successfully.")
 
@@ -61,13 +52,9 @@ while True:
         try:
             todo_index = int(user_action[9:]) - 1
 
-            todos = load_todos()
+            removed_todo = complete_todo(todo_index)
 
-            removed_todo = todos.pop(todo_index)
-
-            write_todos(todos)
-
-            print(f'"{removed_todo}" was removed.')
+            print(f'"{removed_todo}" was removed from the list.')
 
         except ValueError:
             print("Please enter a valid number.")
