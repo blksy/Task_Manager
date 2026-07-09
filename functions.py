@@ -13,6 +13,33 @@ def write_todos(todos_arg, filepath = "todos.txt"):
     with open(filepath, "w") as file:
         file.writelines(f"{todo}\n" for todo in todos_arg)
         
+def add_todo(todo, filepath = "todos.txt"):
+    """Add a new todo to the list and save it to the file."""
+    todos = load_todos(filepath)
+    todos.append(todo)
+    write_todos(todos, filepath)
+    
+def show_todos(filepath = "todos.txt"):
+    """Display all todos."""
+    todos = load_todos(filepath)
+
+def edit_todo(index, new_todo, filepath = "todos.txt"):
+    """Edit an existing todo at the specified index."""
+    todos = load_todos(filepath)
+    if 0 <= index < len(todos):
+        todos[index] = new_todo
+        write_todos(todos, filepath)
+    else:
+        raise IndexError("Todo index out of range.")
+      
+def complete_todo(index, filepath = "todos.txt"):
+    """Remove a todo at the specified index."""
+    todos = load_todos(filepath)
+    if 0 <= index < len(todos):
+        todos.pop(index)
+        write_todos(todos, filepath)
+    else:
+        raise IndexError("Todo index out of range.")
         
 if __name__ == "__main__":
     todos = load_todos()
