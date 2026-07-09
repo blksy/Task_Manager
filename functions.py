@@ -21,7 +21,7 @@ def add_todo(todo, filepath = "todos.txt"):
     
 def show_todos(filepath = "todos.txt"):
     """Display all todos."""
-    todos = load_todos(filepath)
+    return load_todos(filepath)
 
 def edit_todo(index, new_todo, filepath = "todos.txt"):
     """Edit an existing todo at the specified index."""
@@ -36,8 +36,9 @@ def complete_todo(index, filepath = "todos.txt"):
     """Remove a todo at the specified index."""
     todos = load_todos(filepath)
     if 0 <= index < len(todos):
-        todos.pop(index)
+        removed_todo = todos.pop(index)
         write_todos(todos, filepath)
+        return removed_todo
     else:
         raise IndexError("Todo index out of range.")
         
