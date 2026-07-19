@@ -1,4 +1,8 @@
 from functions import add_todo, show_todos, edit_todo, complete_todo
+import time
+
+now = time.strftime("%b %d, %Y %H:%M:%S")
+print(f"It is {now}")
 
 while True:
     user_action = input(
